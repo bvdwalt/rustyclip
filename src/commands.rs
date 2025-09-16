@@ -15,7 +15,7 @@ pub fn list() -> anyhow::Result<()> {
     let entries = store::load_entries()?;
     for (i, entry) in entries.iter().enumerate() {
         println!(
-            "{}: {}...",
+            "{}: {}",
             i,
             entry.text.chars().take(50).collect::<String>()
         );
