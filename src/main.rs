@@ -1,6 +1,6 @@
+mod clipboard;
 mod commands;
 mod store;
-mod clipboard;
 
 use clap::{Parser, Subcommand};
 

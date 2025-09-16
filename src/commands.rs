@@ -1,11 +1,14 @@
 use crate::{clipboard, store};
-use store::ClipEntry;
 use chrono::Utc;
+use store::ClipEntry;
 
 pub fn add() -> anyhow::Result<()> {
     let text = clipboard::get_clipboard_text()?;
     let mut entries = store::load_entries()?;
-    entries.push(ClipEntry { text, timestamp: Utc::now() });
+    entries.push(ClipEntry {
+        text,
+        timestamp: Utc::now(),
+    });
     store::save_entries(&entries)?;
     println!("Saved clipboard entry.");
     Ok(())
@@ -14,11 +17,7 @@ pub fn add() -> anyhow::Result<()> {
 pub fn list() -> anyhow::Result<()> {
     let entries = store::load_entries()?;
     for (i, entry) in entries.iter().enumerate() {
-        println!(
-            "{}: {}",
-            i,
-            entry.text.chars().take(50).collect::<String>()
-        );
+        println!("{}: {}", i, entry.text.chars().take(50).collect::<String>());
     }
     Ok(())
 }
