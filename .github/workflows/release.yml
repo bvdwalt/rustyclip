@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    - name: Cache cargo
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          target
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-
+
+    - name: Build release binary
+      run: cargo build --release
+
+    - name: Package binaries
+      if: runner.os == 'Windows'
+      run: powershell Compress-Archive -Path target\release\rustyclip.exe -DestinationPath target\release\rustyclip-windows.zip
+    - name: Package binaries (Linux/macOS)
+      if: runner.os != 'Windows'
+      run: tar -czf target/release/rustyclip-${{ runner.os }}.tar.gz -C target/release rustyclip
+
+    - name: Publish to crates.io
+      if: matrix.platform == 'ubuntu-latest'
+      env:
+        CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      run: cargo publish --verbose
+
+    - name: Create GitHub Release
+      if: matrix.platform == 'ubuntu-latest'
+      uses: softprops/action-gh-release@v2
+      with:
+        generate_release_notes: true
+        files: |
+          target/release/rustyclip-linux.tar.gz
+          target/release/rustyclip-macos.tar.gz
+          target/release/rustyclip-windows.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,10 +1,11 @@
 
 # 📋 RustyClip 🦀✂️
 
-[![Crates.io](https://img.shields.io/crates/v/rustyclip.svg)](https://crates.io/crates/rustyclip)  
-[![Docs.rs](https://docs.rs/rustyclip/badge.svg)](https://docs.rs/rustyclip)  
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
-[![CI](https://github.com/bvdwalt/rustyclip/actions/workflows/ci.yml/badge.svg)](https://github.com/bvdwalt/rustyclip/actions/workflows/ci.yml)  
+[![Crates.io](https://img.shields.io/crates/v/rustyclip.svg)](https://crates.io/crates/rustyclip)
+[![Docs.rs](https://docs.rs/rustyclip/badge.svg)](https://docs.rs/rustyclip)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/bvdwalt/rustyclip/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/rustyclip/actions/workflows/ci.yml)
+[![CI](https://github.com/bvdwalt/rustyclip/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/rustyclip/actions/workflows/ci.yml)
 [![Release](https://github.com/bvdwalt/rustyclip/actions/workflows/release.yml/badge.svg)](https://github.com/bvdwalt/rustyclip/actions/workflows/release.yml)
 
 ---
