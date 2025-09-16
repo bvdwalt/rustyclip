@@ -85,9 +85,15 @@ jobs:
 
     - name: Publish to crates.io
       if: matrix.platform == 'ubuntu-latest'
-      env:
-        CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-      run: cargo publish --verbose
+      run: |
+        set +e
+        cargo publish --verbose --token ${{ secrets.CARGO_REGISTRY_TOKEN }} 2>&1 | tee publish.log
+        status=${PIPESTATUS[0]}
+        if grep -q 'already exists on crates.io index' publish.log; then
+        echo "Crate already published, skipping failure."
+        exit 0
+        fi
+        exit $status
 
     - name: Create GitHub Release
       if: matrix.platform == 'ubuntu-latest'
