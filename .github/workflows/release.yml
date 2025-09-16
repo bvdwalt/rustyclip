@@ -31,9 +31,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-cargo-
 
-    - name: Build release binary
-      run: cargo build --release
-
     - name: Run Clippy (linting)
       run: cargo clippy -- -D warnings
 
@@ -75,6 +72,8 @@ jobs:
         platform: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
+    - name: Build release binary
+      run: cargo build --release
     - name: Package binaries
       if: runner.os == 'Windows'
       run: powershell Compress-Archive -Path target\release\rustyclip.exe -DestinationPath target\release\rustyclip-windows.zip
