@@ -72,6 +72,8 @@ jobs:
         platform: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
     - name: Build release binary
       run: cargo build --release
     - name: Package binaries
