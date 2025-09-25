@@ -19,6 +19,7 @@ enum Commands {
     List,
     Get { index: usize },
     Clear,
+    Search { query: String },
 }
 
 fn main() -> anyhow::Result<()> {
@@ -29,6 +30,7 @@ fn main() -> anyhow::Result<()> {
         Commands::List => commands::list()?,
         Commands::Get { index } => commands::get(index)?,
         Commands::Clear => commands::clear()?,
+        Commands::Search { query } => commands::search(&query)?,
     }
 
     Ok(())

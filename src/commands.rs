@@ -32,6 +32,17 @@ pub fn get(index: usize) -> anyhow::Result<()> {
     Ok(())
 }
 
+pub fn search(query: &str) -> anyhow::Result<()> {
+    let entries = store::load_entries()?;
+    for (_i, entry) in entries.iter().enumerate() {
+        if entry.text.to_lowercase().contains(query.to_lowercase().as_str()) {
+            println!("{}", entry.text);
+            break;
+        }
+    }
+    Ok(())
+}
+
 pub fn clear() -> anyhow::Result<()> {
     store::save_entries(&[])?;
     println!("History cleared.");
