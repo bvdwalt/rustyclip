@@ -35,7 +35,11 @@ pub fn get(index: usize) -> anyhow::Result<()> {
 pub fn search(query: &str) -> anyhow::Result<()> {
     let entries = store::load_entries()?;
     for entry in entries.iter() {
-        if entry.text.to_lowercase().contains(query.to_lowercase().as_str()) {
+        if entry
+            .text
+            .to_lowercase()
+            .contains(query.to_lowercase().as_str())
+        {
             println!("{}", entry.text);
             break;
         }
