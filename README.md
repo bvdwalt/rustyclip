@@ -1,4 +1,3 @@
-
 # 📋 RustyClip 🦀✂️
 
 [![Crates.io](https://img.shields.io/crates/v/rustyclip.svg)](https://crates.io/crates/rustyclip)
@@ -43,10 +42,11 @@ Extract the archive and place the binary somewhere in your `$PATH`.
 ## 🛠 Usage
 
 ~~~bash
-rustyclip add       # Save the current clipboard text
-rustyclip list      # Show saved clipboard history
-rustyclip get 0     # Print (and soon restore!) entry at index 0
-rustyclip clear     # Clear all saved history
+rustyclip add           # Save the current clipboard text
+rustyclip list          # Show saved clipboard history
+rustyclip get 0         # Print (and soon restore!) entry at index 0
+rustyclip clear         # Clear all saved history
+rustyclip search text   # Search entries for 'text'
 ~~~
 
 ---
@@ -85,7 +85,7 @@ rustyclip get 0
 - [x] Save and list clipboard history  
 - [x] Clear history  
 - [ ] Restore clipboard entries with `get`  
-- [ ] Search entries by keyword  
+- [x] Search entries by keyword  
 - [ ] Configurable storage path  
 - [ ] Hotkey/TUI picker  
 - [x] Prebuilt binaries for all platforms  
